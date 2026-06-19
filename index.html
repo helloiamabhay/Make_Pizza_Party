@@ -1,800 +1,831 @@
-<style>
-  @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap");
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-  .pg {
-    font-family: "Poppins", sans-serif;
-    background: linear-gradient(135deg, #ff6b35 0%, #ff4500 40%, #cc2200 100%);
-    width: 100%;
-  }
-  .ticker {
-    background: rgba(0, 0, 0, 0.2);
-    overflow: hidden;
-    padding: 9px 0;
-  }
-  .ticker-inner {
-    white-space: nowrap;
-    animation: scroll 20s linear infinite;
-    display: inline-block;
-  }
-  @keyframes scroll {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(-50%);
-    }
-  }
-  .ticker-text {
-    display: inline-block;
-    color: #ffe066;
-    font-size: clamp(11px, 2.5vw, 13px);
-    font-weight: 600;
-    padding: 0 clamp(12px, 4vw, 28px);
-  }
-  .hero {
-    text-align: center;
-    padding: clamp(28px, 6vw, 50px) clamp(16px, 5vw, 24px)
-      clamp(32px, 7vw, 60px);
-    position: relative;
-    overflow: hidden;
-  }
-  .hero::before {
-    content: "";
-    position: absolute;
-    top: -60px;
-    left: -60px;
-    width: 200px;
-    height: 200px;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 50%;
-    pointer-events: none;
-  }
-  .hero::after {
-    content: "";
-    position: absolute;
-    bottom: -40px;
-    right: -40px;
-    width: 150px;
-    height: 150px;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 50%;
-    pointer-events: none;
-  }
-  .badge {
-    display: inline-block;
-    background: rgba(255, 255, 255, 0.15);
-    border: 1.5px solid rgba(255, 255, 255, 0.3);
-    color: #fff;
-    font-size: clamp(10px, 2.5vw, 11px);
-    font-weight: 600;
-    letter-spacing: 1px;
-    padding: 5px 14px;
-    border-radius: 20px;
-    margin-bottom: clamp(10px, 3vw, 16px);
-    text-transform: uppercase;
-  }
-  .pizza-emoji {
-    font-size: clamp(52px, 12vw, 80px);
-    display: block;
-    margin-bottom: 6px;
-    animation: bounce 1.8s ease-in-out infinite;
-  }
-  @keyframes bounce {
-    0%,
-    100% {
-      transform: translateY(0) rotate(-3deg);
-    }
-    50% {
-      transform: translateY(-14px) rotate(3deg);
-    }
-  }
-  .hero h1 {
-    font-size: clamp(26px, 8vw, 52px);
-    font-weight: 900;
-    color: #fff;
-    line-height: 1.1;
-    margin-bottom: 10px;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  }
-  .hero h1 span {
-    color: #ffe066;
-  }
-  .hero p.sub {
-    font-size: clamp(13px, 3.5vw, 17px);
-    color: rgba(255, 255, 255, 0.88);
-    margin-bottom: clamp(16px, 4vw, 24px);
-    font-weight: 400;
-    line-height: 1.6;
-    max-width: 480px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .earn-strip {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: center;
-    margin-bottom: clamp(18px, 5vw, 28px);
-  }
-  .earn-chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: rgba(255, 224, 102, 0.25);
-    border: 1.5px solid #ffe066;
-    color: #ffe066;
-    font-weight: 800;
-    font-size: clamp(13px, 3.5vw, 16px);
-    padding: 8px clamp(14px, 4vw, 20px);
-    border-radius: 30px;
-  }
-  .earn-chip.big {
-    background: #ffe066;
-    color: #cc2200;
-    font-size: clamp(14px, 4vw, 18px);
-    padding: 10px clamp(18px, 5vw, 24px);
-    border: none;
-  }
-  .cta-main {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    background: #fff;
-    color: #cc2200;
-    font-size: clamp(14px, 4vw, 18px);
-    font-weight: 800;
-    padding: clamp(11px, 3vw, 14px) clamp(22px, 6vw, 32px);
-    border-radius: 50px;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);
-    letter-spacing: 0.3px;
-    transition: transform 0.15s;
-    text-decoration: none;
-  }
-  .cta-main:hover {
-    transform: scale(1.04);
-  }
-  .hero-trust {
-    margin-top: 14px;
-    font-size: clamp(11px, 2.8vw, 13px);
-    color: rgba(255, 255, 255, 0.6);
-  }
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Get a Pizza Party Prayagraj | QuickRoomRental!</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap");
 
-  .section {
-    padding: clamp(32px, 7vw, 52px) clamp(16px, 5vw, 24px);
-  }
-  .section-inner {
-    max-width: 600px;
-    margin: 0 auto;
-  }
-  .section-title {
-    text-align: center;
-    font-size: clamp(18px, 5vw, 26px);
-    font-weight: 800;
-    color: #fff;
-    margin-bottom: 6px;
-  }
-  .section-sub {
-    text-align: center;
-    font-size: clamp(12px, 3vw, 14px);
-    color: rgba(255, 255, 255, 0.75);
-    margin-bottom: clamp(18px, 4vw, 28px);
-  }
+      html,
+      body {
+        max-width: 100vw;
+        overflow-x: hidden;
+        margin: 0;
+        padding: 0;
+        background: #cc2200; /* Match bottom gradient to prevent white bouncing on mobile scroll */
+      }
 
-  .money-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 10px;
-    margin-bottom: clamp(18px, 4vw, 24px);
-  }
-  .mcard {
-    background: rgba(255, 255, 255, 0.1);
-    border: 1.5px solid rgba(255, 255, 255, 0.2);
-    border-radius: 16px;
-    padding: clamp(14px, 4vw, 20px) clamp(10px, 3vw, 16px);
-    text-align: center;
-  }
-  .mcard.star {
-    background: rgba(255, 224, 102, 0.2);
-    border-color: #ffe066;
-  }
-  .mcard .icon {
-    font-size: clamp(22px, 5vw, 28px);
-    margin-bottom: 4px;
-    display: block;
-  }
-  .mcard .num {
-    font-size: clamp(22px, 6vw, 32px);
-    font-weight: 900;
-    color: #ffe066;
-  }
-  .mcard.star .num {
-    color: #fff;
-  }
-  .mcard .lbl {
-    font-size: clamp(10px, 2.5vw, 12px);
-    color: rgba(255, 255, 255, 0.8);
-    margin-top: 3px;
-    line-height: 1.4;
-  }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
 
-  .calc-box {
-    background: rgba(255, 255, 255, 0.1);
-    border: 1.5px solid rgba(255, 255, 255, 0.2);
-    border-radius: 20px;
-    padding: clamp(18px, 5vw, 24px) clamp(14px, 4vw, 20px);
-  }
-  .calc-lbl {
-    font-size: clamp(12px, 3vw, 14px);
-    color: rgba(255, 255, 255, 0.85);
-    font-weight: 600;
-    margin-bottom: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .calc-lbl span {
-    font-size: clamp(18px, 5vw, 22px);
-    font-weight: 900;
-    color: #ffe066;
-  }
-  input[type="range"] {
-    width: 100%;
-    -webkit-appearance: none;
-    height: 8px;
-    border-radius: 4px;
-    background: rgba(255, 255, 255, 0.2);
-    outline: none;
-    margin: 4px 0 8px;
-    cursor: pointer;
-    accent-color: #ffe066;
-  }
-  input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 26px;
-    height: 26px;
-    border-radius: 50%;
-    background: #ffe066;
-    border: 3px solid #fff;
-    cursor: pointer;
-  }
-  input[type="range"]::-moz-range-thumb {
-    width: 26px;
-    height: 26px;
-    border-radius: 50%;
-    background: #ffe066;
-    border: 3px solid #fff;
-    cursor: pointer;
-  }
-  .prog-labels {
-    display: flex;
-    justify-content: space-between;
-    font-size: clamp(10px, 2.5vw, 12px);
-    color: rgba(255, 255, 255, 0.6);
-    margin-bottom: 16px;
-  }
-  .calc-result {
-    text-align: center;
-    background: rgba(0, 0, 0, 0.15);
-    border-radius: 14px;
-    padding: clamp(14px, 4vw, 20px) 12px;
-  }
-  .calc-rs {
-    font-size: clamp(36px, 10vw, 52px);
-    font-weight: 900;
-    color: #ffe066;
-    line-height: 1;
-  }
-  .calc-msg {
-    font-size: clamp(12px, 3vw, 14px);
-    color: rgba(255, 255, 255, 0.9);
-    margin-top: 8px;
-    font-weight: 600;
-    min-height: 36px;
-  }
-  .pizza-slots {
-    display: flex;
-    gap: 8px;
-    justify-content: center;
-    margin-top: 12px;
-    flex-wrap: wrap;
-  }
-  .pslot {
-    width: clamp(34px, 9vw, 42px);
-    height: clamp(34px, 9vw, 42px);
-    border-radius: 10px;
-    border: 2px dashed rgba(255, 255, 255, 0.3);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: clamp(18px, 5vw, 22px);
-    transition: all 0.3s;
-    background: rgba(255, 255, 255, 0.05);
-  }
-  .pslot.on {
-    background: #ffe066;
-    border-color: #ffd700;
-    transform: scale(1.12);
-  }
+      .pg {
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(
+          135deg,
+          #ff6b35 0%,
+          #ff4500 40%,
+          #cc2200 100%
+        );
+        width: 100%;
+        min-height: 100vh;
+      }
+      .ticker {
+        background: rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+        padding: 9px 0;
+      }
+      .ticker-inner {
+        white-space: nowrap;
+        animation: scroll 20s linear infinite;
+        display: inline-block;
+      }
+      @keyframes scroll {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(-50%);
+        }
+      }
+      .ticker-text {
+        display: inline-block;
+        color: #ffe066;
+        font-size: clamp(11px, 2.5vw, 13px);
+        font-weight: 600;
+        padding: 0 clamp(12px, 4vw, 28px);
+      }
+      .hero {
+        text-align: center;
+        padding: clamp(28px, 6vw, 50px) clamp(16px, 5vw, 24px)
+          clamp(32px, 7vw, 60px);
+        position: relative;
+        overflow: hidden;
+      }
+      .hero::before {
+        content: "";
+        position: absolute;
+        top: -60px;
+        left: -60px;
+        width: 200px;
+        height: 200px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 50%;
+        pointer-events: none;
+      }
+      .hero::after {
+        content: "";
+        position: absolute;
+        bottom: -40px;
+        right: -40px;
+        width: 150px;
+        height: 150px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 50%;
+        pointer-events: none;
+      }
+      .badge {
+        display: inline-block;
+        background: rgba(255, 255, 255, 0.15);
+        border: 1.5px solid rgba(255, 255, 255, 0.3);
+        color: #fff;
+        font-size: clamp(10px, 2.5vw, 11px);
+        font-weight: 600;
+        letter-spacing: 1px;
+        padding: 5px 14px;
+        border-radius: 20px;
+        margin-bottom: clamp(10px, 3vw, 16px);
+        text-transform: uppercase;
+      }
+      .pizza-emoji {
+        font-size: clamp(52px, 12vw, 80px);
+        display: block;
+        margin-bottom: 6px;
+        animation: bounce 1.8s ease-in-out infinite;
+      }
+      @keyframes bounce {
+        0%,
+        100% {
+          transform: translateY(0) rotate(-3deg);
+        }
+        50% {
+          transform: translateY(-14px) rotate(3deg);
+        }
+      }
+      .hero h1 {
+        font-size: clamp(26px, 8vw, 52px);
+        font-weight: 900;
+        color: #fff;
+        line-height: 1.1;
+        margin-bottom: 10px;
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      }
+      .hero h1 span {
+        color: #ffe066;
+      }
+      .hero p.sub {
+        font-size: clamp(13px, 3.5vw, 17px);
+        color: rgba(255, 255, 255, 0.88);
+        margin-bottom: clamp(16px, 4vw, 24px);
+        font-weight: 400;
+        line-height: 1.6;
+        max-width: 480px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .earn-strip {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+        margin-bottom: clamp(18px, 5vw, 28px);
+      }
+      .earn-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: rgba(255, 224, 102, 0.25);
+        border: 1.5px solid #ffe066;
+        color: #ffe066;
+        font-weight: 800;
+        font-size: clamp(13px, 3.5vw, 16px);
+        padding: 8px clamp(14px, 4vw, 20px);
+        border-radius: 30px;
+      }
+      .earn-chip.big {
+        background: #ffe066;
+        color: #cc2200;
+        font-size: clamp(14px, 4vw, 18px);
+        padding: 10px clamp(18px, 5vw, 24px);
+        border: none;
+      }
+      .cta-main {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: #fff;
+        color: #cc2200;
+        font-size: clamp(14px, 4vw, 18px);
+        font-weight: 800;
+        padding: clamp(11px, 3vw, 14px) clamp(22px, 6vw, 32px);
+        border-radius: 50px;
+        border: none;
+        cursor: pointer;
+        box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);
+        letter-spacing: 0.3px;
+        transition: transform 0.15s;
+        text-decoration: none;
+      }
+      .cta-main:hover {
+        transform: scale(1.04);
+      }
+      .hero-trust {
+        margin-top: 14px;
+        font-size: clamp(11px, 2.8vw, 13px);
+        color: rgba(255, 255, 255, 0.6);
+      }
 
-  .steps-wrap {
-    display: flex;
-    flex-direction: column;
-    gap: clamp(10px, 3vw, 16px);
-  }
-  .step-card {
-    display: flex;
-    gap: clamp(10px, 3vw, 16px);
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 18px;
-    padding: clamp(14px, 4vw, 18px) clamp(12px, 3vw, 16px);
-    align-items: flex-start;
-  }
-  .step-num {
-    min-width: clamp(36px, 9vw, 44px);
-    height: clamp(36px, 9vw, 44px);
-    border-radius: 14px;
-    color: #fff;
-    font-weight: 900;
-    font-size: clamp(16px, 5vw, 20px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-  .s1 {
-    background: #3a8ea0;
-  }
-  .s2 {
-    background: #ffe066;
-    color: #cc2200 !important;
-  }
-  .s3 {
-    background: #e8634a;
-  }
-  .s4 {
-    background: rgba(255, 255, 255, 0.25);
-  }
-  .step-body .sh {
-    font-weight: 700;
-    font-size: clamp(13px, 3.5vw, 15px);
-    color: #fff;
-    margin-bottom: 4px;
-  }
-  .step-body .sd {
-    font-size: clamp(11px, 2.8vw, 13px);
-    color: rgba(255, 255, 255, 0.8);
-    line-height: 1.6;
-  }
-  .step-body .sd strong {
-    color: #ffe066;
-  }
+      .section {
+        padding: clamp(32px, 7vw, 52px) clamp(16px, 5vw, 24px);
+      }
+      .section-inner {
+        max-width: 600px;
+        margin: 0 auto;
+      }
+      .section-title {
+        text-align: center;
+        font-size: clamp(18px, 5vw, 26px);
+        font-weight: 800;
+        color: #fff;
+        margin-bottom: 6px;
+      }
+      .section-sub {
+        text-align: center;
+        font-size: clamp(12px, 3vw, 14px);
+        color: rgba(255, 255, 255, 0.75);
+        margin-bottom: clamp(18px, 4vw, 28px);
+      }
 
-  .wg-box {
-    background: rgba(0, 0, 0, 0.2);
-    border: 2px dashed rgba(255, 224, 102, 0.5);
-    border-radius: 20px;
-    padding: clamp(18px, 5vw, 24px) clamp(14px, 4vw, 20px);
-    text-align: center;
-    max-width: 420px;
-    margin: 0 auto;
-  }
-  .wg-name {
-    font-size: clamp(18px, 5vw, 24px);
-    font-weight: 900;
-    color: #ffe066;
-    margin-bottom: 6px;
-  }
-  .wg-sub {
-    font-size: clamp(12px, 3vw, 14px);
-    color: rgba(255, 255, 255, 0.8);
-    margin-bottom: 18px;
-    line-height: 1.5;
-  }
-  .wg-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    background: #25d366;
-    color: #fff;
-    font-weight: 800;
-    font-size: clamp(14px, 4vw, 17px);
-    padding: clamp(12px, 3.5vw, 16px) clamp(22px, 6vw, 32px);
-    border-radius: 50px;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-    max-width: 320px;
-    transition: transform 0.15s;
-  }
-  .wg-btn:hover {
-    transform: scale(1.03);
-  }
-  .wg-btn svg {
-    width: 20px;
-    height: 20px;
-    fill: #fff;
-    flex-shrink: 0;
-  }
+      .money-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 10px;
+        margin-bottom: clamp(18px, 4vw, 24px);
+      }
+      .mcard {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1.5px solid rgba(255, 255, 255, 0.2);
+        border-radius: 16px;
+        padding: clamp(14px, 4vw, 20px) clamp(10px, 3vw, 16px);
+        text-align: center;
+      }
+      .mcard.star {
+        background: rgba(255, 224, 102, 0.2);
+        border-color: #ffe066;
+      }
+      .mcard .icon {
+        font-size: clamp(22px, 5vw, 28px);
+        margin-bottom: 4px;
+        display: block;
+      }
+      .mcard .num {
+        font-size: clamp(22px, 6vw, 32px);
+        font-weight: 900;
+        color: #ffe066;
+      }
+      .mcard.star .num {
+        color: #fff;
+      }
+      .mcard .lbl {
+        font-size: clamp(10px, 2.5vw, 12px);
+        color: rgba(255, 255, 255, 0.8);
+        margin-top: 3px;
+        line-height: 1.4;
+      }
 
-  .rules-wrap {
-    max-width: 520px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: clamp(8px, 2.5vw, 12px);
-  }
-  .rule-card {
-    display: flex;
-    gap: clamp(10px, 3vw, 14px);
-    align-items: flex-start;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 14px;
-    padding: clamp(12px, 3.5vw, 16px) clamp(10px, 3vw, 14px);
-  }
-  .rule-icon {
-    min-width: clamp(28px, 7vw, 36px);
-    height: clamp(28px, 7vw, 36px);
-    border-radius: 10px;
-    background: #ffe066;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: clamp(13px, 3.5vw, 16px);
-    color: #cc2200;
-    font-weight: 800;
-    flex-shrink: 0;
-    margin-top: 1px;
-  }
-  .rule-text .rt {
-    font-weight: 700;
-    font-size: clamp(12px, 3.2vw, 14px);
-    color: #fff;
-    margin-bottom: 3px;
-  }
-  .rule-text .rs {
-    font-size: clamp(11px, 2.8vw, 13px);
-    color: rgba(255, 255, 255, 0.78);
-    line-height: 1.5;
-  }
+      .calc-box {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1.5px solid rgba(255, 255, 255, 0.2);
+        border-radius: 20px;
+        padding: clamp(18px, 5vw, 24px) clamp(14px, 4vw, 20px);
+      }
+      .calc-lbl {
+        font-size: clamp(12px, 3vw, 14px);
+        color: rgba(255, 255, 255, 0.85);
+        font-weight: 600;
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .calc-lbl span {
+        font-size: clamp(18px, 5vw, 22px);
+        font-weight: 900;
+        color: #ffe066;
+      }
+      input[type="range"] {
+        width: 100%;
+        -webkit-appearance: none;
+        height: 8px;
+        border-radius: 4px;
+        background: rgba(255, 255, 255, 0.2);
+        outline: none;
+        margin: 4px 0 8px;
+        cursor: pointer;
+        accent-color: #ffe066;
+      }
+      input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        background: #ffe066;
+        border: 3px solid #fff;
+        cursor: pointer;
+      }
+      input[type="range"]::-moz-range-thumb {
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        background: #ffe066;
+        border: 3px solid #fff;
+        cursor: pointer;
+      }
+      .prog-labels {
+        display: flex;
+        justify-content: space-between;
+        font-size: clamp(10px, 2.5vw, 12px);
+        color: rgba(255, 255, 255, 0.6);
+        margin-bottom: 16px;
+      }
+      .calc-result {
+        text-align: center;
+        background: rgba(0, 0, 0, 0.15);
+        border-radius: 14px;
+        padding: clamp(14px, 4vw, 20px) 12px;
+      }
+      .calc-rs {
+        font-size: clamp(36px, 10vw, 52px);
+        font-weight: 900;
+        color: #ffe066;
+        line-height: 1;
+      }
+      .calc-msg {
+        font-size: clamp(12px, 3vw, 14px);
+        color: rgba(255, 255, 255, 0.9);
+        margin-top: 8px;
+        font-weight: 600;
+        min-height: 36px;
+      }
+      .pizza-slots {
+        display: flex;
+        gap: 8px;
+        justify-content: center;
+        margin-top: 12px;
+        flex-wrap: wrap;
+      }
+      .pslot {
+        width: clamp(34px, 9vw, 42px);
+        height: clamp(34px, 9vw, 42px);
+        border-radius: 10px;
+        border: 2px dashed rgba(255, 255, 255, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: clamp(18px, 5vw, 22px);
+        transition: all 0.3s;
+        background: rgba(255, 255, 255, 0.05);
+      }
+      .pslot.on {
+        background: #ffe066;
+        border-color: #ffd700;
+        transform: scale(1.12);
+      }
 
-  .footer-cta-sec {
-    text-align: center;
-    padding: clamp(28px, 7vw, 52px) clamp(16px, 5vw, 24px)
-      clamp(36px, 8vw, 60px);
-  }
-  .footer-pizza {
-    font-size: clamp(48px, 12vw, 72px);
-    display: block;
-    margin-bottom: 10px;
-    animation: bounce 2.2s ease-in-out infinite;
-  }
-  .footer-title {
-    font-size: clamp(20px, 6vw, 32px);
-    font-weight: 900;
-    color: #fff;
-    margin-bottom: 10px;
-    line-height: 1.2;
-  }
-  .footer-sub {
-    font-size: clamp(12px, 3.2vw, 15px);
-    color: rgba(255, 255, 255, 0.85);
-    margin-bottom: clamp(20px, 5vw, 28px);
-    line-height: 1.6;
-  }
-  .footer-brand {
-    margin-top: 20px;
-    color: rgba(255, 255, 255, 0.5);
-    font-size: clamp(10px, 2.5vw, 12px);
-  }
-</style>
+      .steps-wrap {
+        display: flex;
+        flex-direction: column;
+        gap: clamp(10px, 3vw, 16px);
+      }
+      .step-card {
+        display: flex;
+        gap: clamp(10px, 3vw, 16px);
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 18px;
+        padding: clamp(14px, 4vw, 18px) clamp(12px, 3vw, 16px);
+        align-items: flex-start;
+      }
+      .step-num {
+        min-width: clamp(36px, 9vw, 44px);
+        height: clamp(36px, 9vw, 44px);
+        border-radius: 14px;
+        color: #fff;
+        font-weight: 900;
+        font-size: clamp(16px, 5vw, 20px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      .s1 {
+        background: #3a8ea0;
+      }
+      .s2 {
+        background: #ffe066;
+        color: #cc2200 !important;
+      }
+      .s3 {
+        background: #e8634a;
+      }
+      .s4 {
+        background: rgba(255, 255, 255, 0.25);
+      }
+      .step-body .sh {
+        font-weight: 700;
+        font-size: clamp(13px, 3.5vw, 15px);
+        color: #fff;
+        margin-bottom: 4px;
+      }
+      .step-body .sd {
+        font-size: clamp(11px, 2.8vw, 13px);
+        color: rgba(255, 255, 255, 0.8);
+        line-height: 1.6;
+      }
+      .step-body .sd strong {
+        color: #ffe066;
+      }
 
-<div class="pg">
-  <div class="ticker">
-    <div class="ticker-inner">
-      <span class="ticker-text">🍕 Prayagraj Students ke liye</span>
-      <span class="ticker-text">💰 1 Listing = ₹25 Pocket Money</span>
-      <span class="ticker-text">🎉 4 Listings = ₹100 = Pizza Party!</span>
-      <span class="ticker-text">✅ Room Owner ke liye Bilkul FREE</span>
-      <span class="ticker-text">🍕 Prayagraj Students ke liye</span>
-      <span class="ticker-text">💰 1 Listing = ₹25 Pocket Money</span>
-      <span class="ticker-text">🎉 4 Listings = ₹100 = Pizza Party!</span>
-      <span class="ticker-text">✅ Room Owner ke liye Bilkul FREE</span>
-    </div>
-  </div>
+      .wg-box {
+        background: rgba(0, 0, 0, 0.2);
+        border: 2px dashed rgba(255, 224, 102, 0.5);
+        border-radius: 20px;
+        padding: clamp(18px, 5vw, 24px) clamp(14px, 4vw, 20px);
+        text-align: center;
+        max-width: 420px;
+        margin: 0 auto;
+      }
+      .wg-name {
+        font-size: clamp(18px, 5vw, 24px);
+        font-weight: 900;
+        color: #ffe066;
+        margin-bottom: 6px;
+      }
+      .wg-sub {
+        font-size: clamp(12px, 3vw, 14px);
+        color: rgba(255, 255, 255, 0.8);
+        margin-bottom: 18px;
+        line-height: 1.5;
+      }
+      .wg-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        background: #25d366;
+        color: #fff;
+        font-weight: 800;
+        font-size: clamp(14px, 4vw, 17px);
+        padding: clamp(12px, 3.5vw, 16px) clamp(22px, 6vw, 32px);
+        border-radius: 50px;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        max-width: 320px;
+        transition: transform 0.15s;
+      }
+      .wg-btn:hover {
+        transform: scale(1.03);
+      }
+      .wg-btn svg {
+        width: 20px;
+        height: 20px;
+        fill: #fff;
+        flex-shrink: 0;
+      }
 
-  <div class="hero">
-    <div style="position: relative; z-index: 1">
-      <div class="badge">📍 Sirf Prayagraj Students ke liye</div>
-      <span class="pizza-emoji">🍕</span>
-      <h1>Get a <span>Pizza</span><br />Party — FREE!</h1>
-      <p class="sub">
-        Room owners ko QuickRoomRental pe list karwao aur kamao
-        <strong style="color: #ffe066">₹25 har listing pe</strong> — seedha
-        pocket mein!
-      </p>
-      <div class="earn-strip">
-        <div class="earn-chip">🏠 1 Listing = ₹25</div>
-        <div class="earn-chip big">🍕 4 Listings = ₹100</div>
-      </div>
-      <a class="cta-main" href="#wg-section">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="#CC2200">
-          <path
-            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.122 1.533 5.854L.057 23.643a.5.5 0 0 0 .615.613l5.939-1.47A11.955 11.955 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.9 0-3.687-.51-5.224-1.4l-.374-.225-3.875.958.974-3.774-.245-.389A9.938 9.938 0 0 1 2 12C2 6.478 6.477 2 12 2s10 4.478 10 10-4.477 10-10 10z"
-          />
-        </svg>
-        WhatsApp Group Join Karo →
-      </a>
-      <p class="hero-trust">
-        ✅ Bilkul Free • ✅ Prayagraj Only • ✅ Verified Payment
-      </p>
-    </div>
-  </div>
+      .rules-wrap {
+        max-width: 520px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: clamp(8px, 2.5vw, 12px);
+      }
+      .rule-card {
+        display: flex;
+        gap: clamp(10px, 3vw, 14px);
+        align-items: flex-start;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 14px;
+        padding: clamp(12px, 3.5vw, 16px) clamp(10px, 3vw, 14px);
+      }
+      .rule-icon {
+        min-width: clamp(28px, 7vw, 36px);
+        height: clamp(28px, 7vw, 36px);
+        border-radius: 10px;
+        background: #ffe066;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: clamp(13px, 3.5vw, 16px);
+        color: #cc2200;
+        font-weight: 800;
+        flex-shrink: 0;
+        margin-top: 1px;
+      }
+      .rule-text .rt {
+        font-weight: 700;
+        font-size: clamp(12px, 3.2vw, 14px);
+        color: #fff;
+        margin-bottom: 3px;
+      }
+      .rule-text .rs {
+        font-size: clamp(11px, 2.8vw, 13px);
+        color: rgba(255, 255, 255, 0.78);
+        line-height: 1.5;
+      }
 
-  <div class="section">
-    <div class="section-inner">
-      <div class="section-title">Kitna Milega? 💰</div>
-      <div class="section-sub">Jitni listing, utna paisa — simple hai!</div>
-      <div class="money-grid">
-        <div class="mcard">
-          <span class="icon">🏠</span>
-          <div class="num">₹25</div>
-          <div class="lbl">1 listing karo</div>
-        </div>
-        <div class="mcard">
-          <span class="icon">🏠🏠</span>
-          <div class="num">₹50</div>
-          <div class="lbl">2 listings karo</div>
-        </div>
-        <div class="mcard">
-          <span class="icon">🏠🏠🏠</span>
-          <div class="num">₹75</div>
-          <div class="lbl">3 listings karo</div>
-        </div>
-        <div class="mcard star">
-          <span class="icon">🍕</span>
-          <div class="num">₹100</div>
-          <div class="lbl">4 listings = Pizza Party!</div>
-        </div>
-      </div>
-
-      <div class="calc-box">
-        <div class="calc-lbl">
-          Kitni listings karoge? <span id="lc">1</span>
-        </div>
-        <input
-          type="range"
-          min="1"
-          max="20"
-          value="1"
-          step="1"
-          id="ls"
-          oninput="calc(this.value)"
-        />
-        <div class="prog-labels">
-          <span>1</span><span>4 = 🍕 Pizza</span><span>20</span>
-        </div>
-        <div class="calc-result">
-          <div class="calc-rs" id="ce">₹25</div>
-          <div class="calc-msg" id="cm">Ek listing kar — ₹25 pakka! 💪</div>
-          <div class="pizza-slots">
-            <div class="pslot" id="p1"></div>
-            <div class="pslot" id="p2"></div>
-            <div class="pslot" id="p3"></div>
-            <div class="pslot" id="p4"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="section" style="padding-top: 0">
-    <div class="section-inner">
-      <div class="section-title">Kaise Kaam Karta Hai? 👇</div>
-      <div class="section-sub">4 easy steps — bas itna karna hai</div>
-      <div class="steps-wrap">
-        <div class="step-card">
-          <div class="step-num s1">1</div>
-          <div class="step-body">
-            <div class="sh">📱 WhatsApp Group Join Karo</div>
-            <div class="sd">
-              Neeche button click karo aur
-              <strong>Pizza Party Squad</strong> join karo. Wahan saari details
-              aur guidance milegi.
-            </div>
-          </div>
-        </div>
-        <div class="step-card">
-          <div class="step-num s2">2</div>
-          <div class="step-body">
-            <div class="sh">🏠 Room Owner se Baat Karo</div>
-            <div class="sd">
-              Apne area ke PG ya makan malik se milo. Unhe batao —
-              <strong
-                >"QuickRoomRental pe FREE listing hoti hai, seedha students call
-                karte hain!"</strong
-              >
-            </div>
-          </div>
-        </div>
-        <div class="step-card">
-          <div class="step-num s3">3</div>
-          <div class="step-body">
-            <div class="sh">📋 Listing Mein Help Karo</div>
-            <div class="sd">
-              Owner ke saath milke room ki
-              <strong>photo, rent, address</strong> site pe daal do. Owner ka
-              koi charge nahi — bilkul FREE!
-            </div>
-          </div>
-        </div>
-        <div class="step-card">
-          <div class="step-num s4">4</div>
-          <div class="step-body">
-            <div class="sh">💸 Group mein Bhejo aur Paisa Lo!</div>
-            <div class="sd">
-              WhatsApp group mein owner ka
-              <strong>number + listing link</strong> bhejo. Verify hote hi ₹25
-              pakka! 4 listings = <strong>🍕 Pizza Party!</strong>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="section" id="wg-section" style="padding-top: 0">
-    <div class="section-inner">
-      <div class="section-title">🟢 Abhi Join Karo!</div>
-      <div class="section-sub">WhatsApp group mein aao, earning shuru karo</div>
-      <div class="wg-box">
-        <div class="wg-name">🍕 Pizza Party Squad 🍕</div>
-        <div class="wg-sub">
-          QuickRoomRental ka official student earning group — Prayagraj<br />Listing
-          karo → Paisa kamao → Pizza party karo!
-        </div>
-        <button
-          class="wg-btn"
-          onclick="
-            window.open(
-              'https://wa.me/+919999999999?text=Bhai+main+Pizza+Party+Squad+join+karna+chahta+hoon!+QuickRoomRental+Prayagraj+referral+ke+liye+🍕',
-              '_blank',
-            )
-          "
-        >
-          <svg viewBox="0 0 24 24">
-            <path
-              d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.122 1.533 5.854L.057 23.643a.5.5 0 0 0 .615.613l5.939-1.47A11.955 11.955 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.9 0-3.687-.51-5.224-1.4l-.374-.225-3.875.958.974-3.774-.245-.389A9.938 9.938 0 0 1 2 12C2 6.478 6.477 2 12 2s10 4.478 10 10-4.477 10-10 10z"
-            />
-          </svg>
-          WhatsApp pe Join Karo
-        </button>
-        <p
-          style="
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 11px;
-            margin-top: 12px;
-          "
-        >
-          Group join karte hi instructions milenge 👆
-        </p>
-      </div>
-    </div>
-  </div>
-
-  <div class="section" style="padding-top: 0">
-    <div class="section-inner">
-      <div class="section-title">Rules Yaad Rakho 📌</div>
-      <div class="section-sub">Simple rules — honest kaam, pakka paisa</div>
-      <div class="rules-wrap">
-        <div class="rule-card">
-          <div class="rule-icon">✅</div>
-          <div class="rule-text">
-            <div class="rt">Owner se paise mat lo!</div>
-            <div class="rs">
-              Listing bilkul FREE hai. Koi charge mat karna — yahi tumhari sabse
-              badi USP hai.
-            </div>
-          </div>
-        </div>
-        <div class="rule-card">
-          <div class="rule-icon">📸</div>
-          <div class="rule-text">
-            <div class="rt">Real listing chahiye</div>
-            <div class="rs">
-              Proper photo, sahi rent aur complete address. Incomplete ya fake
-              listing pe reward nahi milega.
-            </div>
-          </div>
-        </div>
-        <div class="rule-card">
-          <div class="rule-icon">📱</div>
-          <div class="rule-text">
-            <div class="rt">Group mein submit karo</div>
-            <div class="rs">
-              Listing live hone ke baad owner ka number + link WhatsApp group
-              mein share karo.
-            </div>
-          </div>
-        </div>
-        <div class="rule-card">
-          <div class="rule-icon">💰</div>
-          <div class="rule-text">
-            <div class="rt">Verify = Same week payment</div>
-            <div class="rs">
-              Team verify karegi — approve hote hi ₹25 same week mein milega. No
-              delay!
-            </div>
-          </div>
-        </div>
-        <div class="rule-card">
-          <div class="rule-icon">🚫</div>
-          <div class="rule-text">
-            <div class="rt">Ek owner = Ek listing</div>
-            <div class="rs">
-              Same owner ki duplicate listing nahi chalegi. Ek hi baar count
-              hogi.
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="footer-cta-sec">
-    <span class="footer-pizza">🍕</span>
-    <h2 class="footer-title">Pizza Party ka<br />Wait Mat Karo!</h2>
-    <p class="footer-sub">
-      4 room owners ko QuickRoomRental pe list karwao,<br />₹100 kamao aur
-      <strong style="color: #ffe066">dosto ke saath pizza party</strong> enjoy
-      karo!
-    </p>
-    <a class="cta-main" href="#wg-section"> Abhi Group Join Karo 🍕 → </a>
-    <div
-      class="footer-brand"
-      style="
+      .footer-cta-sec {
+        text-align: center;
+        padding: clamp(28px, 7vw, 52px) clamp(16px, 5vw, 24px)
+          clamp(36px, 8vw, 60px);
+      }
+      .footer-pizza {
+        font-size: clamp(48px, 12vw, 72px);
+        display: block;
+        margin-bottom: 10px;
+        animation: bounce 2.2s ease-in-out infinite;
+      }
+      .footer-title {
+        font-size: clamp(20px, 6vw, 32px);
+        font-weight: 900;
+        color: #fff;
+        margin-bottom: 10px;
+        line-height: 1.2;
+      }
+      .footer-sub {
+        font-size: clamp(12px, 3.2vw, 15px);
+        color: rgba(255, 255, 255, 0.85);
+        margin-bottom: clamp(20px, 5vw, 28px);
+        line-height: 1.6;
+      }
+      .footer-brand {
         margin-top: 20px;
         color: rgba(255, 255, 255, 0.5);
         font-size: clamp(10px, 2.5vw, 12px);
-      "
-    >
-      <strong style="color: rgba(255, 255, 255, 0.8)"
-        >QuickRoomRental.com</strong
-      >
-      — Find your perfect stay<br />
-      Prayagraj mein students ke liye, students ke saath
-    </div>
-  </div>
-</div>
+      }
+    </style>
+  </head>
+  <body>
+    <div class="pg">
+      <div class="ticker">
+        <div class="ticker-inner">
+          <span class="ticker-text">🍕 Prayagraj Students ke liye</span>
+          <span class="ticker-text">💰 1 Listing = ₹25 Pocket Money</span>
+          <span class="ticker-text">🎉 4 Listings = ₹100 = Pizza Party!</span>
+          <span class="ticker-text">✅ Room Owner ke liye Bilkul FREE</span>
+          <span class="ticker-text">🍕 Prayagraj Students ke liye</span>
+          <span class="ticker-text">💰 1 Listing = ₹25 Pocket Money</span>
+          <span class="ticker-text">🎉 4 Listings = ₹100 = Pizza Party!</span>
+          <span class="ticker-text">✅ Room Owner ke liye Bilkul FREE</span>
+        </div>
+      </div>
 
-<script>
-  function calc(v) {
-    v = parseInt(v);
-    document.getElementById("lc").textContent = v;
-    document.getElementById("ce").textContent = "₹" + v * 25;
-    var msgs = [
-      "Ek listing kar — ₹25 pakka! 💪",
-      "Sahi chal raha hai! Bas 2 aur!",
-      "Ek aur — Pizza Party pakki! 🤩",
-      "🍕 PIZZA PARTY! ₹100 confirm bhai!",
-      "Ek aur pizza party earn kar li! 🎉",
-      "Bhai tu toh pizza king hai! 👑",
-    ];
-    var mi =
-      v <= 1 ? 0 : v === 2 ? 1 : v === 3 ? 2 : v === 4 ? 3 : v < 9 ? 4 : 5;
-    document.getElementById("cm").textContent = msgs[mi];
-    for (var i = 1; i <= 4; i++) {
-      var s = document.getElementById("p" + i);
-      s.textContent = v >= i ? "🍕" : "";
-      s.className = "pslot" + (v >= i ? " on" : "");
-    }
-  }
-</script>
+      <div class="hero">
+        <div style="position: relative; z-index: 1">
+          <div class="badge">📍 Sirf Prayagraj Students ke liye</div>
+          <span class="pizza-emoji">🍕</span>
+          <h1>Make a <span>Pizza</span><br />Party!</h1>
+          <p class="sub">
+            Room owners ko QuickRoomRental pe list karwao aur kamao
+            <strong style="color: #ffe066">₹25 har listing pe</strong> — seedha
+            pocket mein!
+          </p>
+          <div class="earn-strip">
+            <div class="earn-chip">🏠 1 Listing = ₹25</div>
+            <div class="earn-chip big">🍕 4 Listings = ₹100</div>
+          </div>
+          <a class="cta-main" href="#wg-section">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="#CC2200">
+              <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.122 1.533 5.854L.057 23.643a.5.5 0 0 0 .615.613l5.939-1.47A11.955 11.955 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.9 0-3.687-.51-5.224-1.4l-.374-.225-3.875.958.974-3.774-.245-.389A9.938 9.938 0 0 1 2 12C2 6.478 6.477 2 12 2s10 4.478 10 10-4.477 10-10 10z"
+              />
+            </svg>
+            WhatsApp Group Join Karo →
+          </a>
+          <p class="hero-trust">
+            ✅ Bilkul Free • ✅ Prayagraj Only • ✅ Verified Payment
+          </p>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-inner">
+          <div class="section-title">Kitna Milega? 💰</div>
+          <div class="section-sub">Jitni listing, utna paisa — simple hai!</div>
+          <div class="money-grid">
+            <div class="mcard">
+              <span class="icon">🏠</span>
+              <div class="num">₹25</div>
+              <div class="lbl">1 listing karo</div>
+            </div>
+            <div class="mcard">
+              <span class="icon">🏠🏠</span>
+              <div class="num">₹50</div>
+              <div class="lbl">2 listings karo</div>
+            </div>
+            <div class="mcard">
+              <span class="icon">🏠🏠🏠</span>
+              <div class="num">₹75</div>
+              <div class="lbl">3 listings karo</div>
+            </div>
+            <div class="mcard star">
+              <span class="icon">🍕</span>
+              <div class="num">₹100</div>
+              <div class="lbl">4 listings = Pizza Party!</div>
+            </div>
+          </div>
+
+          <div class="calc-box">
+            <div class="calc-lbl">
+              Kitni listings karoge? <span id="lc">1</span>
+            </div>
+            <input
+              type="range"
+              min="1"
+              max="20"
+              value="1"
+              step="1"
+              id="ls"
+              oninput="calc(this.value)"
+            />
+            <div class="prog-labels">
+              <span>1</span><span>4 = 🍕 Pizza</span><span>20</span>
+            </div>
+            <div class="calc-result">
+              <div class="calc-rs" id="ce">₹25</div>
+              <div class="calc-msg" id="cm">Ek listing kar — ₹25 pakka! 💪</div>
+              <div class="pizza-slots">
+                <div class="pslot" id="p1"></div>
+                <div class="pslot" id="p2"></div>
+                <div class="pslot" id="p3"></div>
+                <div class="pslot" id="p4"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section" style="padding-top: 0">
+        <div class="section-inner">
+          <div class="section-title">Kaise Kaam Karta Hai? 👇</div>
+          <div class="section-sub">4 easy steps — bas itna karna hai</div>
+          <div class="steps-wrap">
+            <div class="step-card">
+              <div class="step-num s1">1</div>
+              <div class="step-body">
+                <div class="sh">📱 WhatsApp Group Join Karo</div>
+                <div class="sd">
+                  Neeche button click karo aur
+                  <strong>Pizza Party Squad</strong> join karo. Wahan saari
+                  details aur guidance milegi.
+                </div>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-num s2">2</div>
+              <div class="step-body">
+                <div class="sh">🏠 Room Owner se Baat Karo</div>
+                <div class="sd">
+                  Apne area ke PG ya makan malik se milo. Unhe batao —
+                  <strong
+                    >"QuickRoomRental pe FREE listing hoti hai, seedha students
+                    call karte hain!"</strong
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-num s3">3</div>
+              <div class="step-body">
+                <div class="sh">📋 Listing Mein Help Karo</div>
+                <div class="sd">
+                  Owner ke saath milke room ki
+                  <strong>photo, rent, address</strong> site pe daal do. Owner
+                  ka koi charge nahi — bilkul FREE!
+                </div>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-num s4">4</div>
+              <div class="step-body">
+                <div class="sh">💸 Group mein Bhejo aur Paisa Lo!</div>
+                <div class="sd">
+                  WhatsApp group mein owner ka
+                  <strong>number + listing link</strong> bhejo. Verify hote hi
+                  ₹25 pakka! 4 listings = <strong>🍕 Pizza Party!</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section" id="wg-section" style="padding-top: 0">
+        <div class="section-inner">
+          <div class="section-title">🟢 Abhi Join Karo!</div>
+          <div class="section-sub">
+            WhatsApp group mein aao, earning shuru karo
+          </div>
+          <div class="wg-box">
+            <div class="wg-name">🍕 Pizza Party Squad 🍕</div>
+            <div class="wg-sub">
+              QuickRoomRental ka official student earning group — Prayagraj<br />Listing
+              karo → Paisa kamao → Pizza party karo!
+            </div>
+            <button
+              class="wg-btn"
+              onclick="
+                window.open(
+                  'https://wa.me/+919999999999?text=Bhai+main+Pizza+Party+Squad+join+karna+chahta+hoon!+QuickRoomRental+Prayagraj+referral+ke+liye+🍕',
+                  '_blank',
+                )
+              "
+            >
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.122 1.533 5.854L.057 23.643a.5.5 0 0 0 .615.613l5.939-1.47A11.955 11.955 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.9 0-3.687-.51-5.224-1.4l-.374-.225-3.875.958.974-3.774-.245-.389A9.938 9.938 0 0 1 2 12C2 6.478 6.477 2 12 2s10 4.478 10 10-4.477 10-10 10z"
+                />
+              </svg>
+              WhatsApp pe Join Karo
+            </button>
+            <p
+              style="
+                color: rgba(255, 255, 255, 0.5);
+                font-size: 11px;
+                margin-top: 12px;
+              "
+            >
+              Group join karte hi instructions milenge 👆
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="section" style="padding-top: 0">
+        <div class="section-inner">
+          <div class="section-title">Rules Yaad Rakho 📌</div>
+          <div class="section-sub">Simple rules — honest kaam, pakka paisa</div>
+          <div class="rules-wrap">
+            <div class="rule-card">
+              <div class="rule-icon">✅</div>
+              <div class="rule-text">
+                <div class="rt">Owner se paise mat lo!</div>
+                <div class="rs">
+                  Listing bilkul FREE hai. Koi charge mat karna — yahi tumhari
+                  sabse badi USP hai.
+                </div>
+              </div>
+            </div>
+            <div class="rule-card">
+              <div class="rule-icon">📸</div>
+              <div class="rule-text">
+                <div class="rt">Real listing chahiye</div>
+                <div class="rs">
+                  Proper photo, sahi rent aur complete address. Incomplete ya
+                  fake listing pe reward nahi milega.
+                </div>
+              </div>
+            </div>
+            <div class="rule-card">
+              <div class="rule-icon">📱</div>
+              <div class="rule-text">
+                <div class="rt">Group mein submit karo</div>
+                <div class="rs">
+                  Listing live hone ke baad owner ka number + link WhatsApp
+                  group mein share karo.
+                </div>
+              </div>
+            </div>
+            <div class="rule-card">
+              <div class="rule-icon">💰</div>
+              <div class="rule-text">
+                <div class="rt">Verify = Same week payment</div>
+                <div class="rs">
+                  Team verify karegi — approve hote hi ₹25 same week mein
+                  milega. No delay!
+                </div>
+              </div>
+            </div>
+            <div class="rule-card">
+              <div class="rule-icon">🚫</div>
+              <div class="rule-text">
+                <div class="rt">Ek owner = Ek listing</div>
+                <div class="rs">
+                  Same owner ki duplicate listing nahi chalegi. Ek hi baar count
+                  hogi.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-cta-sec">
+        <span class="footer-pizza">🍕</span>
+        <h2 class="footer-title">Pizza Party ka<br />Wait Mat Karo!</h2>
+        <p class="footer-sub">
+          4 room owners ko QuickRoomRental pe list karwao,<br />₹100 kamao aur
+          <strong style="color: #ffe066">dosto ke saath pizza party</strong>
+          enjoy karo!
+        </p>
+        <a class="cta-main" href="#wg-section"> Abhi Group Join Karo 🍕 → </a>
+        <div
+          class="footer-brand"
+          style="
+            margin-top: 20px;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: clamp(10px, 2.5vw, 12px);
+          "
+        >
+          <strong style="color: rgba(255, 255, 255, 0.8)"
+            >QuickRoomRental.com</strong
+          >
+          — Find your perfect stay<br />
+          Prayagraj mein students ke liye, students ke saath
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function calc(v) {
+        v = parseInt(v);
+        document.getElementById("lc").textContent = v;
+        document.getElementById("ce").textContent = "₹" + v * 25;
+        var msgs = [
+          "Ek listing kar — ₹25 pakka! 💪",
+          "Sahi chal raha hai! Bas 2 aur!",
+          "Ek aur — Pizza Party pakki! 🤩",
+          "🍕 PIZZA PARTY! ₹100 confirm bhai!",
+          "Ek aur pizza party earn kar li! 🎉",
+          "Bhai tu toh pizza king hai! 👑",
+        ];
+        var mi =
+          v <= 1 ? 0 : v === 2 ? 1 : v === 3 ? 2 : v === 4 ? 3 : v < 9 ? 4 : 5;
+        document.getElementById("cm").textContent = msgs[mi];
+        for (var i = 1; i <= 4; i++) {
+          var s = document.getElementById("p" + i);
+          s.textContent = v >= i ? "🍕" : "";
+          s.className = "pslot" + (v >= i ? " on" : "");
+        }
+      }
+    </script>
+  </body>
+</html>
